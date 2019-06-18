@@ -1,22 +1,27 @@
 // variables 
 export const countries = [{
         code: 'gb',
-        name: 'Great Britain'
+        name: 'Great Britain',
+        img: 'country__gb.jpg'
     },
     {
         code: 'us',
-        name: 'United States'
+        name: 'United States',
+        img: 'country__us.jpg'
     },
     {
         code: 'fr',
-        name: 'France'
+        name: 'France',
+        img: 'country__fr.jpg'
     },
     {
         code: 'au',
-        name: 'Australia'
+        name: 'Australia',
+        img: 'country__au.jpg'
     },
     {
         code: 'id',
-        name: 'India'
+        name: 'India',
+        img: 'country__id.jpg'
     }
 ];

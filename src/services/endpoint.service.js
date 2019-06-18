@@ -3,7 +3,7 @@ const endpointUrls = {
 };
 
 const endpointNames = {
-    NEWS_HEADLINES: 'forecast'
+    NEWS_HEADLINES: 'newsHeadlines'
 };
 
 const buildURL = (endpointName = '', params = {}) => {

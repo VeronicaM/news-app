@@ -10,19 +10,24 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 // CSS
 import './ImgButton.css';
 
+// Utilities
+import classNames from 'classnames';
+
 class ImgButton extends Component {
 
     handleOnClick = (event) => {
-    	// prevent click on currently selected image button
-    	if(this.props.isActive) return false;
-
         return this.props.onClickAction(this.props.id);
     };
 
     render() {
-    	 return <ButtonBase
+        const wrapperClassName = classNames('image__wrapper', {
+            'image--active': this.props.isActive
+        });
+
+        return <ButtonBase
               focusRipple
-              className="image__wrapper"
+              className={wrapperClassName}
+              disabled={this.props.isActive}
               onClick={this.handleOnClick}
             >
               <img
@@ -30,7 +35,7 @@ class ImgButton extends Component {
                 src={this.props.image}
                 alt={this.props.text}
               />
-              <span className="image__backdrop" />
+             {!this.props.isActive && <span className="image__backdrop" /> }
               <span className="image__btn">
                 <Typography
                   component="span"
@@ -55,7 +60,7 @@ ImgButton.propTypes = {
 };
 
 ImgButton.defaultProps = {
-	isActive: false
+    isActive: false
 }
 
 export default ImgButton;

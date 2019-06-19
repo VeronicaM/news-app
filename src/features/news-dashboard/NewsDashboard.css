@@ -1,0 +1,19 @@
+.news-dashboard__countries-list {
+	margin-bottom: 20px;
+}
+
+.news-dashboard__loading-container {
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 130px;
+}
+
+@media only screen and (max-width: 767px) {
+  /* For mobile phones: */
+  .news-dashboard__countries-list {
+  	display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

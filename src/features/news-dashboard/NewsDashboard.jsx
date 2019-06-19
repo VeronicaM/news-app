@@ -6,11 +6,17 @@ import Typography from '@material-ui/core/Typography';
 // Material UI Components
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+// Custom Components
+import ImgButton from '../img-button/ImgButton.jsx';
+
 // Services
 import NewsService from './news.service.js';
 
 // constants
 import { countries } from '../../constants/countries.js';
+
+// css
+import './NewsDashboard.css';
 
 const HEADLINES_MAX_COUNT = 5;
 
@@ -47,7 +53,7 @@ class NewsDashboard extends Component {
     }
 
     getNewsHeadlines = (country = defaultCountry) => {
-        debugger;
+  
         const onError = (error) => {
             // set error flag to true and isLoading to false to update UI
             this.stateSetter({
@@ -82,9 +88,7 @@ class NewsDashboard extends Component {
         }
     };
 
-    selectCountry = (event) => {
-        event.preventDefault();
-        const selectedCountryCode = event.target.attributes.id.nodeValue;
+    selectCountry = (selectedCountryCode) => {
         const selectedCountry = countries.find((country) => country.code === selectedCountryCode);
 
         // update selected country
@@ -94,20 +98,31 @@ class NewsDashboard extends Component {
         this.getNewsHeadlines(selectedCountry);
     };
 
+    renderCountriesList = () => {
+        const renderCountryBtn = (country) => {
+            const imgPath = require(`../../images/${country.img}`);
+            const isActive = country.code === this.state.selectedCountry.code;
+
+            return <ImgButton 
+                      key={country.code}
+                      image={imgPath}
+                      id={country.code}
+                      text={country.name}
+                      onClickAction={this.selectCountry} 
+                      isActive={isActive}
+                    />;
+        };
+
+        return countries.map(renderCountryBtn);
+    };
+
     render() {
+        // TODO handle empty state
         const renderNewsHeadlines = this.state.newsHeadlines.slice(0, HEADLINES_MAX_COUNT).map((headline, index) => {
             return <div key={index}> {headline.title} </div>;
         });
 
-        const countriesList = countries.map((country) => {
-            return <li key={country.code} id={country.code} onClick={this.selectCountry}> {country.name} </li>;
-        });
-
         const countryName = (this.state.selectedCountry && this.state.selectedCountry.name) || defaultCountry.name;
-
-        if (this.state.isLoading) {
-            return <div className="loading-container">  <CircularProgress /> Loading.... </div>;
-        }
 
         if (this.state.error) {
             return <Typography variant="h6" color="secondary" display="block">
@@ -117,16 +132,23 @@ class NewsDashboard extends Component {
 
         return (
             <Fragment>
-                <Typography variant="h4" gutterBottom>
-                    Countries List 
-                </Typography>
-                <ul>
-                  {countriesList}
-                </ul>
-                 <Typography variant="h6" gutterBottom>
-                     News Headlines for {countryName} 
-                 </Typography>
-                  {renderNewsHeadlines}
+                <div className="news-dashboard__countries-list"> 
+                    <Typography variant="h4" gutterBottom>
+                        Countries List 
+                    </Typography>
+                    {this.renderCountriesList()}
+                </div>
+
+                {this.state.isLoading ? 
+                   <div className="news-dashboard__loading-container">  <CircularProgress /> Loading.... </div> 
+                   :
+                   <div>
+                        <Typography variant="h6" gutterBottom>
+                             News Headlines for {countryName} 
+                         </Typography>
+                             {renderNewsHeadlines}
+                    </div>
+              }
               </Fragment>
         );
     };

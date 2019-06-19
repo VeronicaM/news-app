@@ -8,6 +8,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Custom Components
 import ImgButton from '../img-button/ImgButton.jsx';
+import NewsCard from '../news-card/NewsCard.jsx';
 
 // Services
 import NewsService from './news.service.js';
@@ -77,8 +78,8 @@ class NewsDashboard extends Component {
     };
 
     /**
-     *    Verifies that the component is mounted before setting the state
-     *    to avoid getting a warning for setting state on unmounted compoent
+     * Verifies that the component is mounted before setting the state
+     * to avoid getting a warning for setting state on unmounted compoent
      */
     stateSetter = (stateParams) => {
         if (this.hasMounted) {
@@ -111,15 +112,31 @@ class NewsDashboard extends Component {
                     />;
         };
 
-        return countries.map(renderCountryBtn);
+        return <div className="news-dashboard__countries-container"> 
+            {countries.map(renderCountryBtn)} 
+        </div>;
+    };
+
+    renderNewsCards = () => {
+        if(!this.state.newsHeadlines.length) return <div> No headlines available</div>;
+
+        const renderCard = (headline, index) => {
+            return <NewsCard key={index}
+                image={headline.urlToImage}
+                title={headline.title}
+                description={headline.description}
+                url={headline.url}
+                sourceName={headline.source.name}
+                author={headline.author}
+            />
+        };
+
+        const newsHeadlines = this.state.newsHeadlines.map(renderCard);
+
+        return <div className="news-dashboard__news-card-container"> {newsHeadlines} </div>;
     };
 
     render() {
-        // TODO handle empty state
-        const renderNewsHeadlines = this.state.newsHeadlines.map((headline, index) => {
-            return <div key={index}> {headline.title} </div>;
-        });
-
         const countryName = (this.state.selectedCountry && this.state.selectedCountry.name) || defaultCountry.name;
 
         if (this.state.error) {
@@ -130,21 +147,19 @@ class NewsDashboard extends Component {
 
         return (
             <Fragment>
-                <div className="news-dashboard__countries-list"> 
-                    <Typography variant="h4" gutterBottom>
-                        Countries List 
-                    </Typography>
-                    {this.renderCountriesList()}
-                </div>
-
+                <Typography variant="h4" gutterBottom className="news-dashboard__headline">
+                    Countries List 
+                </Typography>
+                {this.renderCountriesList()}
+             
                 {this.state.isLoading ? 
                    <div className="news-dashboard__loading-container">  <CircularProgress /> Loading.... </div> 
                    :
                    <div>
-                        <Typography variant="h6" gutterBottom>
+                        <Typography variant="h6" gutterBottom className="news-dashboard__headline">
                              News Headlines for {countryName} 
                          </Typography>
-                             {renderNewsHeadlines}
+                             {this.renderNewsCards()}
                     </div>
               }
               </Fragment>

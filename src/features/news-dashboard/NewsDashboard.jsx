@@ -18,8 +18,6 @@ import { countries } from '../../constants/countries.js';
 // css
 import './NewsDashboard.css';
 
-const HEADLINES_MAX_COUNT = 5;
-
 const defaultCountry = {
     code: 'gb',
     name: 'Great Britain'
@@ -118,7 +116,7 @@ class NewsDashboard extends Component {
 
     render() {
         // TODO handle empty state
-        const renderNewsHeadlines = this.state.newsHeadlines.slice(0, HEADLINES_MAX_COUNT).map((headline, index) => {
+        const renderNewsHeadlines = this.state.newsHeadlines.map((headline, index) => {
             return <div key={index}> {headline.title} </div>;
         });
 

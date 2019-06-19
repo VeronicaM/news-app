@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 // Material UI Components
@@ -13,7 +13,7 @@ import './ImgButton.css';
 // Utilities
 import classNames from 'classnames';
 
-class ImgButton extends Component {
+class ImgButton extends PureComponent {
 
     handleOnClick = (event) => {
         return this.props.onClickAction(this.props.id);

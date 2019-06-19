@@ -1,5 +1,5 @@
 const endpointUrls = {
-    newsHeadlines: `https://newsapi.org/v2/top-headlines?country=:country`
+    newsHeadlines: `https://newsapi.org/v2/top-headlines?country=:country&pageSize=:pageSize`
 };
 
 const endpointNames = {

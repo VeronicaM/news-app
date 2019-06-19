@@ -9,6 +9,7 @@ import EndpointService from '../../services/endpoint.service.js';
 
 // local Variables
 const filename = 'news.service.js';
+const HEADLINES_MAX_COUNT = 5;
 
 // get news headlines for given country from NEWS API
 const getHeadlines = (country) => {
@@ -31,7 +32,7 @@ const getHeadlines = (country) => {
     };
 
     // get news headlines endpoint
-    const URL = EndpointService.buildURL(EndpointService.constants.NEWS_HEADLINES, { country });
+    const URL = EndpointService.buildURL(EndpointService.constants.NEWS_HEADLINES, { country, pageSize: HEADLINES_MAX_COUNT });
 
     const headers = {
         headers: {

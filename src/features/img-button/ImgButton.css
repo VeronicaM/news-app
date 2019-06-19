@@ -74,6 +74,8 @@
   .image__title {
     color: darkblue !important;
     text-shadow: none;
+    padding: 0;
+    min-width: 90px;
   }
   .image__text--marked {
     background-color: darkblue;

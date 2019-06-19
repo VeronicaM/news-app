@@ -30,11 +30,14 @@ class ImgButton extends Component {
               disabled={this.props.isActive}
               onClick={this.handleOnClick}
             >
-              <img
-                className="image"
-                src={this.props.image}
-                alt={this.props.text}
-              />
+              <picture className="image">
+                <source media="(min-width: 768px)" srcSet={this.props.image} />
+               <source media="(max-width: 767px)" 
+                 sizes="1px"
+                 srcSet="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 1w"
+                />
+                <img  className="image" alt={this.props.text} src={this.props.image} />
+              </picture>
              {!this.props.isActive && <span className="image__backdrop" /> }
               <span className="image__btn">
                 <Typography
@@ -44,7 +47,7 @@ class ImgButton extends Component {
                   className="image__title"
                 >
                   {this.props.text}
-                  <span className="image__text--marked" />
+                 {!this.props.isActive &&  <span className="image__text--marked" /> }
                 </Typography>
               </span>
            </ButtonBase>;

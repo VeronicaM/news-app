@@ -2,12 +2,16 @@
     position: relative;
     width: 160px;
     height: 100px;
-    margin-right: 10px !important;
-    cursor: hand; 
+    margin: 0 10px 10px 0 !important;
+    cursor: hand;
+}
+
+.image__wrapper.image--active {
+    background-color: rgba(143, 172, 172, 0.15);
 }
 
 .image__wrapper:hover .image__backdrop {
-   opacity: 0.15;
+   opacity: 0.1;
 }
 
 .image__wrapper:hover .image__text--marked {
@@ -46,6 +50,7 @@
 .image__title {
     padding: 10px;
     color: white !important; /* override inherited color*/
+    text-shadow: 1px 1px black;
     min-width: 115px;
 }
 
@@ -58,4 +63,24 @@
     width: 18px;
     background-color: white;
     transition: opacity 0.3s;
+}
+
+@media only screen and (max-width: 767px) {
+  /* For mobile phones: */
+  .image__backdrop {
+    background-color: darkblue;
+    opacity: 0.2;
+  }
+  .image__title {
+    color: darkblue !important;
+    text-shadow: none;
+  }
+  .image__text--marked {
+    background-color: darkblue;
+  }
+  .image__wrapper {
+    width: 110px;
+    height: 45px;
+    margin: 5px !important;
+  }
 }

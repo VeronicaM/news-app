@@ -1,0 +1,61 @@
+.image__wrapper {
+    position: relative;
+    width: 160px;
+    height: 100px;
+    margin-right: 10px !important;
+    cursor: hand; 
+}
+
+.image__wrapper:hover .image__backdrop {
+   opacity: 0.15;
+}
+
+.image__wrapper:hover .image__text--marked {
+   opacity: 0;
+}
+
+.image__wrapper:hover .image__title {
+   border: 2px solid white;
+}
+
+.image {
+    width: inherit;
+    height: inherit;
+}
+.image__backdrop {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.4;
+    transition: opacity 0.5s;
+}
+.image__btn {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image__title {
+    padding: 10px;
+    color: white !important; /* override inherited color*/
+    min-width: 115px;
+}
+
+.image__text--marked {
+    position: absolute;
+    bottom: calc(50% - 15px);
+    left: calc(50% - 9px);
+    display: inline-block;
+    height: 2px;
+    width: 18px;
+    background-color: white;
+    transition: opacity 0.3s;
+}
